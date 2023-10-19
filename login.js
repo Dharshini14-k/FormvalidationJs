@@ -1,26 +1,26 @@
 function validateForm() {
-    var email = document.querySelector('input[type="text"]').value;
-    var password = document.querySelector('input.password').value;
+     
+    var emailInput = document.querySelector(".email");
+    var passwordInput = document.querySelector(".password");
+
+     
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+     
+    var errorElement = document.getElementById("error-message");
+
+     
+    errorElement.innerText = "";
  
-    var errorElements = document.querySelectorAll('.error');
-    for (var i = 0; i < errorElements.length; i++) {
-        errorElements[i].textContent = "";
+    if (!emailRegex.test(emailInput.value)) {
+        errorElement.innerText = "Please enter a valid email address.";
+        return false;
     }
-
-    var isValid = true;
-
-    if (email.trim() === "") {
-        document.querySelector('.input-field:nth-child(1) .error').textContent = "Email is required";
-        isValid = false;
+ 
+    if (passwordInput.value.length < 8) {
+        errorElement.innerText = "Password must be at least 8 characters long.";
+        return false;
     }
-
-    if (password.trim() === "") {
-        document.querySelector('.input-field:nth-child(2) .error').textContent = "Password is required";
-        isValid = false;
-    }
-
-    if (isValid) {
-         
-        window.location.href = "todolist.html";
-    }
+ 
+    window.location.href = "todolist.html";
 }
