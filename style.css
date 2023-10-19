@@ -99,3 +99,8 @@ body{
     cursor: pointer;
     float: right;
   }
+@media (min-width: 800px) {
+    .container {
+        width: 70%;  
+    }
+}
