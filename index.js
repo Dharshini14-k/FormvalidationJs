@@ -1,18 +1,44 @@
-function validateForm() {
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
+ function validateForm() {
+    
+    var nameInput = document.getElementById("name");
+    var emailInput = document.getElementById("email");
+    var passwordInput = document.getElementById("password");
+    var confirmPasswordInput = document.getElementById("confirmPassword");
+
+    
+    var nameRegex = /^[A-Za-z]+$/;
+    var emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
  
-    if (name === '' || email === '' || password === '' || confirmPassword === '') {
-        alert('Please fill in all fields.');
+    if (!nameRegex.test(nameInput.value)) {
+        alert("Please enter a valid name with only characters.");
         return false;
     }
 
-    if (password !== confirmPassword) {
-        alert('Passwords do not match.');
+    
+    if (!emailRegex.test(emailInput.value)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+     
+    if (passwordInput.value.length < 8) {
+        alert("Password must be at least 8 characters long.");
+        return false;
+    }
+
+    if (passwordInput.value !== confirmPasswordInput.value) {
+        alert("Passwords do not match.");
         return false;
     }
  
-    window.location.href = 'login.html';
+    var userData = {
+        name: nameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+    };
+ 
+    localStorage.setItem("user", JSON.stringify(userData));
+
+     
+    window.location.href = "login.html";
 }
